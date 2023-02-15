@@ -1,0 +1,46 @@
+tasks = []
+
+def add_task(task):
+    tasks.append(task)
+    print(f"Task added: {task}")
+
+def view_tasks():
+    if tasks:
+        print("Current Tasks:")
+        for i, task in enumerate(tasks, 1):
+            print(f"{i}. {task}")
+    else:
+        print("No tasks to display.")
+
+def delete_task(index):
+    try:
+        task = tasks.pop(index - 1)
+        print(f"Task deleted: {task}")
+    except IndexError:
+        print("Invalid task number.")
+
+def get_choice():
+    while True:
+        user_input = input("Enter 1 to add task\n"
+                           "Enter 2 to view tasks\n"
+                           "Enter 3 to delete task\n"
+                           "Enter q to quit\n").strip()
+        if user_input in ('1', '2', '3', 'q'):
+            return user_input
+        print("Invalid input, try again.")
+
+while True:
+    choice = get_choice()
+
+    if choice == 'q':
+        break
+    elif choice == '1':
+        task = input("Enter task: ").strip()
+        add_task(task)
+    elif choice == '2':
+        view_tasks()
+    elif choice == '3':
+        index = int(input("Enter task number: "))
+        delete_task(index)
+
+
